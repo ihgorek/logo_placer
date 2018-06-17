@@ -1,5 +1,5 @@
 import argparse
-from painter import Corner, LogoPainter
+from back.painter import Corner, LogoPainter
 import os
 
 
