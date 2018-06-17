@@ -19,7 +19,6 @@ class LogoPainterGUI(object):
             'botton_bg': 'lavender',
             'active_botton_bg': 'lemon chiffon'
         }
-        self.step = 1
         self.master = master
         master.title('Логотипная')  # logoPhotoFactory
         master.geometry('1100x700+500+100')  # width=1000, height=700, x=500, y=100
