@@ -3,10 +3,12 @@ import PIL.ImageTk
 from tkinter import *
 from tkinter import filedialog, messagebox
 from back.painter import Corner, LogoPainter
+import subprocess
 
 
 class LogoPainterGUI(object):
     def __init__(self, master):
+        self.save_to_path = None
         self.command_painter = {
             'logo_path': '',
             'target_path': '',
@@ -20,6 +22,7 @@ class LogoPainterGUI(object):
             'active_botton_bg': 'lemon chiffon'
         }
         self.master = master
+
         master.title('Логотипная')  # logoPhotoFactory
         master.geometry('1100x700+500+100')  # width=1000, height=700, x=500, y=100
         master.resizable(True, True)  # the window can be resize horizontally and vertically
@@ -30,7 +33,8 @@ class LogoPainterGUI(object):
         self.info_frame = Frame(master,
                                 bg=self.color['bg'],
                                 height=200)
-        self.info_frame.pack(side='top')
+        self.info_frame.pack(side='top',
+                             pady=15)
 
         # create frame for user
         self.step_frame = Frame(master,
@@ -40,7 +44,8 @@ class LogoPainterGUI(object):
         # create frame for opportunities to go back
         self.back_frame = Frame(master,
                                 bg=self.color['bg'])
-        self.back_frame.pack(side='bottom')
+        self.back_frame.pack(side='bottom',
+                             pady=15)
 
     def step_one(self):
 
@@ -198,11 +203,22 @@ class LogoPainterGUI(object):
     # run painter if all parameters exists
     def start_logo(self):
         if self.command_painter['logo_path'] and self.command_painter['target_path']:
-            LogoPainter(logo_path=self.command_painter['logo_path'],
-                        target_path=self.command_painter['target_path'],
-                        save_to_path=self.command_painter['save_to'],
-                        corner=self.command_painter['corner']
-                        ).process_all()
+            self.save_to_path = LogoPainter(logo_path=self.command_painter['logo_path'],
+                                            target_path=self.command_painter['target_path'],
+                                            save_to_path=self.command_painter['save_to'],
+                                            corner=self.command_painter['corner']
+                                            ).process_all()
+
+            final_button = Button(self.step_frame,
+                                  text='Открыть папку с файлами',
+                                  command=self.open_final_dir,
+                                  font=('Helvetica', 14),
+                                  bg=self.color['botton_bg'],
+                                  activebackground=self.color['active_botton_bg']
+                                  )
+            final_button.pack(side=LEFT,
+                              anchor=W)
+
             self.command_painter = {
                 'logo_path': '',
                 'target_path': '',
@@ -223,6 +239,10 @@ class LogoPainterGUI(object):
     def clear_frame(frame):
         for widget in frame.winfo_children():
             widget.destroy()
+
+    def open_final_dir(self):
+        print(self.save_to_path)
+        subprocess.call('explorer ' + self.save_to_path)
 
 
 if __name__ == '__main__':
