@@ -1,0 +1,1 @@
+pyinstaller logo_placer.spec
