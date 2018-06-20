@@ -18,8 +18,8 @@ class LogoPainterGUI(object):
         }
         self.color = {
             'bg': 'azure',
-            'botton_bg': 'lavender',
-            'active_botton_bg': 'lemon chiffon'
+            'button_bg': 'lavender',
+            'active_button_bg': 'lemon chiffon'
         }
         self.master = master
 
@@ -64,8 +64,8 @@ class LogoPainterGUI(object):
                              text='Выбрать логотип',
                              command=self.select_logo,
                              font=('Helvetica', 14),
-                             bg=self.color['botton_bg'],
-                             activebackground=self.color['active_botton_bg'])
+                             bg=self.color['button_bg'],
+                             activebackground=self.color['active_button_bg'])
         logo_button.pack(pady=30)
 
     def step_two(self):
@@ -87,8 +87,8 @@ class LogoPainterGUI(object):
                               text='Выбрать фотографию',
                               command=self.select_photo,
                               font=('Helvetica', 14),
-                              bg=self.color['botton_bg'],
-                              activebackground=self.color['active_botton_bg'])
+                              bg=self.color['button_bg'],
+                              activebackground=self.color['active_button_bg'])
         photo_button.pack(side=LEFT,
                           pady=30)
 
@@ -96,8 +96,8 @@ class LogoPainterGUI(object):
                                text='Выбрать папку с фотографиями',
                                command=self.select_photos,
                                font=('Helvetica', 14),
-                               bg=self.color['botton_bg'],
-                               activebackground=self.color['active_botton_bg'])
+                               bg=self.color['button_bg'],
+                               activebackground=self.color['active_button_bg'])
         photos_button.pack(side=RIGHT,
                            pady=30)
 
@@ -105,8 +105,8 @@ class LogoPainterGUI(object):
                              text='Предыдущий шаг',
                              command=self.step_one,
                              font=('Helvetica', 14),
-                             bg=self.color['botton_bg'],
-                             activebackground=self.color['active_botton_bg'])
+                             bg=self.color['button_bg'],
+                             activebackground=self.color['active_button_bg'])
         back_button.pack(side=LEFT,
                          anchor=W)
 
@@ -131,16 +131,16 @@ class LogoPainterGUI(object):
                                text='Залоготипить',
                                command=self.start_logo,
                                font=('Helvetica', 14),
-                               bg=self.color['botton_bg'],
-                               activebackground=self.color['active_botton_bg'])
+                               bg=self.color['button_bg'],
+                               activebackground=self.color['active_button_bg'])
         submit_button.pack(pady=30)
 
         back_button = Button(self.back_frame,
                              text='Предыдущий шаг',
                              command=self.step_two,
                              font=('Helvetica', 14),
-                             bg=self.color['botton_bg'],
-                             activebackground=self.color['active_botton_bg'])
+                             bg=self.color['button_bg'],
+                             activebackground=self.color['active_button_bg'])
         back_button.pack(side=LEFT,
                          anchor=W)
 
@@ -203,18 +203,21 @@ class LogoPainterGUI(object):
     # run painter if all parameters exists
     def start_logo(self):
         if self.command_painter['logo_path'] and self.command_painter['target_path']:
-            self.save_to_path = LogoPainter(logo_path=self.command_painter['logo_path'],
-                                            target_path=self.command_painter['target_path'],
-                                            save_to_path=self.command_painter['save_to'],
-                                            corner=self.command_painter['corner']
-                                            ).process_all()
+            painter = LogoPainter(logo_path=self.command_painter['logo_path'],
+                                  target_path=self.command_painter['target_path'],
+                                  save_to_path=self.command_painter['save_to'],
+                                  corner=self.command_painter['corner']
+                                  )
+            painter.process_all()
+
+            self.save_to_path = painter.save_to_path
 
             final_button = Button(self.step_frame,
                                   text='Открыть папку с файлами',
                                   command=self.open_final_dir,
                                   font=('Helvetica', 14),
-                                  bg=self.color['botton_bg'],
-                                  activebackground=self.color['active_botton_bg']
+                                  bg=self.color['button_bg'],
+                                  activebackground=self.color['active_button_bg']
                                   )
             final_button.pack(side=LEFT,
                               anchor=W)

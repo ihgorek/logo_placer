@@ -126,7 +126,6 @@ class LogoPainter(object):
     def process_all(self):
         for image in self.images:
             self.process_one(image)
-        return self.save_to_path
 
     @classmethod
     def get_all_dir_files(cls, dir_path):
@@ -138,9 +137,6 @@ class LogoPainter(object):
             elif os.path.isdir(path_from_start):
                 files_list += cls.get_all_dir_files(path_from_start)
         return files_list
-
-    def notification_of_completion(self):
-        pass
 
 
 if __name__ == '__main__':
