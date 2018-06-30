@@ -13,7 +13,7 @@ class LogoPainterGUI(object):
             'logo_path': '',
             'target_path': '',
             'save_to': 'result',
-            'corner': Corner.BOTTOM_RIGHT,
+            'corner': Corner.TOP_RIGHT,
             'logo_resize_rate': 0.2
         }
         self.color = {
