@@ -18,7 +18,7 @@ class LogoPainter(object):
                  logo_resize_rate=0.2,  # logo_min_dimension / img_min_dimension
                  margin_rate=0.01,  # margin_size / img_min_dimension
                  min_logo_min_dim=300,  # px, minimum size of logo min_dimension
-                 corner=Corner.BOTTOM_RIGHT):
+                 corner=Corner.TOP_RIGHT):
 
         self.init_time = time.time()
 
